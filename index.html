@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero-poster.webp">
-  <link rel="stylesheet" href="css/styles.css?v=20261017">
+  <link rel="stylesheet" href="css/styles.css?v=20261018">
 </head>
 <body>
   <a class="skip" href="#menu">Saltar al menú</a>
@@ -599,6 +599,25 @@
     <span class="orderbar__total" data-cart-total>$0</span>
   </button>
 
+  <!-- ============ AVISO: ESTAMOS CERRADOS (solo fuera del horario) ============ -->
+  <div class="closed-scrim" data-closed-close hidden></div>
+  <div class="closed" data-closed role="dialog" aria-modal="true" aria-labelledby="closed-title" aria-hidden="true" tabindex="-1">
+    <button class="icon-btn closed__x" type="button" data-closed-close aria-label="Cerrar aviso">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <img class="closed__bear" src="assets/mascota-cara.webp" alt="" width="120" height="120">
+    <p class="closed__tag"><span class="closed__dot"></span>Fuera de horario</p>
+    <h2 class="closed__title" id="closed-title">Estamos cerrados</h2>
+    <p class="closed__next">La plancha está descansando. Abrimos <strong data-closed-next>pronto</strong></p>
+    <ul class="closed__hours">
+      <li><span>Martes</span><strong>5:00 a 10:00 p.m.</strong></li>
+      <li><span>Miércoles a domingo</span><strong>1:00 a 10:00 p.m.</strong></li>
+      <li><span>Lunes</span><strong>Cerrado</strong></li>
+    </ul>
+    <p class="closed__note">Puedes ver el menú y dejar tu pedido listo. Si lo envías ahora, te respondemos apenas abramos.</p>
+    <button class="btn btn--primary closed__cta" type="button" data-closed-close data-closed-menu>Ver el menú</button>
+  </div>
+
   <!-- ============ AVISO DE LA MASCOTA ============ -->
   <div class="toast" data-toast role="status" aria-live="polite">
     <img src="assets/mascota-cara.webp" alt="" width="48" height="48">
@@ -684,6 +703,10 @@
     </header>
 
     <div class="cart__body">
+      <p class="cart__closed" data-closed-cart hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span>Ahora estamos cerrados. Puedes enviar tu pedido y lo atendemos cuando abramos: <strong data-closed-next>pronto</strong></span>
+      </p>
       <div class="cart__empty" data-cart-empty>
         <img src="assets/mascota-cara.webp" alt="" width="140" height="140" loading="lazy">
         <p class="cart__empty-title">Tu mochila está vacía</p>
@@ -747,6 +770,6 @@
     </footer>
   </aside>
 
-  <script defer src="js/main.js?v=20261017"></script>
+  <script defer src="js/main.js?v=20261018"></script>
 </body>
 </html>

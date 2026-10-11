@@ -385,6 +385,7 @@
     }
     out.push("💳 Forma de pago: " + f.pago.value);
     if (f.notas.value.trim()) out.push("📝 Notas: " + f.notas.value.trim());
+    if (isClosed) { out.push(""); out.push("⏰ Envío este pedido fuera del horario. Lo espero cuando abran."); }
     out.push("");
     out.push("¡Gracias!");
     return out.join("\n");
@@ -456,26 +457,70 @@
     var hh = h > 12 ? h - 12 : h;
     return (hh === 1 ? "la " : "las ") + hh + ":00 " + (h >= 12 ? "p.m." : "a.m.");
   }
+  var isClosed = false;
+
   function initStatus() {
-    var box = $("[data-status]"); if (!box) return;
     var now = nowInVenezuela();
     if (now.day < 0) return;
     var today = CONFIG.hours[now.day];
+    $$(".hours li.is-today").forEach(function (el) { el.classList.remove("is-today"); });
     var li = $('.hours li[data-day="' + now.day + '"]'); if (li) li.classList.add("is-today");
-    var open = today && now.h >= today[0] && now.h < today[1];
-    var text;
-    if (open) {
-      text = "Abierto ahora · cerramos a " + hourLabel(today[1]);
-    } else if (today && now.h < today[0]) {
-      text = "Cerrado ahora · hoy abrimos a " + hourLabel(today[0]);
-    } else {
-      for (var i = 1; i <= 7; i++) {
-        var d = (now.day + i) % 7, hrs = CONFIG.hours[d];
-        if (hrs) { text = "Cerrado ahora · abrimos " + (i === 1 ? "mañana" : "el " + DAYS[d]) + " a " + hourLabel(hrs[0]); break; }
+    var open = !!(today && now.h >= today[0] && now.h < today[1]);
+    var next = "";
+    if (!open) {
+      if (today && now.h < today[0]) {
+        next = "hoy a " + hourLabel(today[0]);
+      } else {
+        for (var i = 1; i <= 7; i++) {
+          var d = (now.day + i) % 7, hrs = CONFIG.hours[d];
+          if (hrs) { next = (i === 1 ? "mañana" : "el " + DAYS[d]) + " a " + hourLabel(hrs[0]); break; }
+        }
       }
     }
-    box.classList.toggle("is-open", !!open);
-    $("[data-status-text]", box).textContent = text;
+    var box = $("[data-status]");
+    if (box) {
+      box.classList.toggle("is-open", open);
+      $("[data-status-text]", box).textContent = open
+        ? "Abierto ahora · cerramos a " + hourLabel(today[1])
+        : "Cerrado ahora · abrimos " + next;
+    }
+    setClosed(!open, next);
+  }
+
+  /* Aviso "Estamos cerrados": aparece una vez por visita, después de la entrada del video */
+  function setClosed(closed, next) {
+    isClosed = closed;
+    $$("[data-closed-next]").forEach(function (el) { el.textContent = next; });
+    var strip = $("[data-closed-cart]"); if (strip) strip.hidden = !closed;
+    if (!closed) hideClosed();
+  }
+  function showClosed() {
+    var el = $("[data-closed]"); if (!el || !isClosed) return;
+    try { if (sessionStorage.getItem("cumbre-aviso-cerrado")) return; sessionStorage.setItem("cumbre-aviso-cerrado", "1"); } catch (e) {}
+    if (document.body.classList.contains("cart-open") || document.body.classList.contains("sheet-open")) return;
+    $(".closed-scrim").hidden = false;
+    void el.offsetWidth;
+    $(".closed-scrim").classList.add("is-on");
+    el.classList.add("is-open");
+    el.setAttribute("aria-hidden", "false");
+    document.body.classList.add("closed-open");
+    setTimeout(function () { el.focus(); }, 60);
+  }
+  function hideClosed() {
+    var el = $("[data-closed]"); if (!el || !el.classList.contains("is-open")) return;
+    el.classList.remove("is-open");
+    el.setAttribute("aria-hidden", "true");
+    $(".closed-scrim").classList.remove("is-on");
+    document.body.classList.remove("closed-open");
+    setTimeout(function () { $(".closed-scrim").hidden = true; }, 350);
+  }
+  function initClosed() {
+    $$("[data-closed-close]").forEach(function (b) { b.addEventListener("click", hideClosed); });
+    var menuBtn = $("[data-closed-menu]");
+    if (menuBtn) menuBtn.addEventListener("click", function () { $("#menu").scrollIntoView(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") hideClosed(); });
+    // Se espera a que termine la entrada del logo sobre el video (≈4,5 s)
+    setTimeout(showClosed, 4800);
   }
 
   /* ------------------------------------------------------------------
@@ -534,6 +579,7 @@
     safe(initSheet);
     safe(initFilters);
     safe(initStatus);
+    safe(initClosed);
     safe(initReveal);
     safe(function () { $$("[data-year]").forEach(function (y) { y.textContent = new Date().getFullYear(); }); });
     setInterval(function () { safe(initStatus); }, 60000);
