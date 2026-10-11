@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero-poster.webp">
-  <link rel="stylesheet" href="css/styles.css?v=20261015">
+  <link rel="stylesheet" href="css/styles.css?v=20261016">
 </head>
 <body>
   <a class="skip" href="#menu">Saltar al menú</a>
@@ -726,7 +726,16 @@
                 <small data-geo-acc></small>
               </div>
               <a data-geo-map href="#" target="_blank" rel="noopener">Ver en el mapa</a>
-              <button type="button" data-geo-clear aria-label="Quitar la ubicación">Quitar</button>
+              <button type="button" class="trash" data-geo-clear aria-label="Quitar la ubicación" title="Quitar la ubicación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button>
+            </div>
+            <div class="geo__help" data-geo-help hidden>
+              <p class="geo__help-title">La ubicación está bloqueada para esta página</p>
+              <p class="geo__help-sub">Tu <span data-geo-device>navegador</span> no deja que la página vuelva a preguntar. Actívala así (toma unos segundos):</p>
+              <ol class="geo__steps" data-geo-steps></ol>
+              <div class="geo__help-actions">
+                <button type="button" class="btn btn--primary geo__retry" data-geo-retry>Ya la activé, intentar de nuevo</button>
+                <button type="button" class="geo__write" data-geo-write>Mejor escribo la dirección</button>
+              </div>
             </div>
             <p class="geo__msg" data-geo-msg role="status"></p>
           </div>
@@ -768,6 +777,6 @@
     </footer>
   </aside>
 
-  <script defer src="js/main.js?v=20261015"></script>
+  <script defer src="js/main.js?v=20261016"></script>
 </body>
 </html>

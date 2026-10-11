@@ -109,9 +109,10 @@
           "<output>" + l.qty + "</output>" +
           '<button type="button" data-step="1" aria-label="Añadir uno">+</button>' +
         "</div>" +
-        '<button type="button" class="line__rm" data-remove>Quitar</button>' +
+        '<button type="button" class="trash line__rm" data-remove aria-label="Quitar ' + esc(l.name) + ' del pedido" title="Quitar del pedido">' + TRASH_SVG + "</button>" +
       "</div></li>";
   }
+  var TRASH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>';
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -440,7 +441,83 @@
     }
     syncModo();
 
+    var help = $("[data-geo-help]");
+    var ua = navigator.userAgent || "";
+    var device = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? "ios"
+      : /Android/.test(ua) ? "android" : "pc";
+    var STEPS = {
+      android: {
+        name: "celular",
+        steps: [
+          "Toca el ícono que está a la izquierda de la dirección de la página (un candado o una <b>ⓘ</b>).",
+          "Entra en <b>Permisos</b> y luego en <b>Ubicación</b>.",
+          "Elige <b>Permitir</b> o <b>Preguntar</b>. Así te aparecerá la opción <b>Solo esta vez</b>.",
+          "Revisa también que la ubicación del teléfono esté encendida.",
+          "Vuelve aquí y toca <b>Intentar de nuevo</b>."
+        ]
+      },
+      ios: {
+        name: "iPhone",
+        steps: [
+          "Toca <b>aA</b> (o el ícono de ajustes) junto a la dirección de la página.",
+          "Entra en <b>Ajustes del sitio web</b> y en <b>Ubicación</b> elige <b>Preguntar</b>.",
+          "Si no aparece: Ajustes del iPhone, <b>Privacidad y seguridad</b>, <b>Localización</b>, <b>Safari</b> y elige <b>Preguntar la próxima vez</b>.",
+          "Vuelve aquí y toca <b>Intentar de nuevo</b>. Podrás elegir <b>Permitir una vez</b>."
+        ]
+      },
+      pc: {
+        name: "navegador",
+        steps: [
+          "Haz clic en el candado o en el ícono de ajustes que está a la izquierda de la dirección de la página.",
+          "Busca <b>Ubicación</b> y cámbiala a <b>Permitir</b> o <b>Preguntar</b> (o toca <b>Restablecer permisos</b>).",
+          "Vuelve aquí y toca <b>Intentar de nuevo</b>."
+        ]
+      }
+    };
+    $("[data-geo-device]").textContent = STEPS[device].name;
+    $("[data-geo-steps]").innerHTML = STEPS[device].steps.map(function (t) { return "<li>" + t + "</li>"; }).join("");
+
+    function permState(cb) {
+      if (!navigator.permissions || !navigator.permissions.query) return cb("unknown");
+      navigator.permissions.query({ name: "geolocation" }).then(function (st) {
+        if (!st._watched) {
+          st._watched = true;
+          st.onchange = function () { // si el cliente lo activa en los ajustes, seguimos solos
+            if (st.state !== "denied" && !help.hidden) { help.hidden = true; btn.hidden = false; if (st.state === "granted") request(); }
+          };
+        }
+        cb(st.state);
+      }, function () { cb("unknown"); });
+    }
+    function showHelp() {
+      help.hidden = false; btn.hidden = true; showMsg("");
+      label.textContent = "Usar mi ubicación actual";
+    }
+
+    $("[data-geo-retry]").addEventListener("click", function () {
+      permState(function (state) {
+        if (state === "denied") {
+          showMsg("Todavía aparece bloqueada. Revisa los pasos de arriba o recarga la página después de activarla.");
+          help.classList.remove("is-shake"); void help.offsetWidth; help.classList.add("is-shake");
+          return;
+        }
+        help.hidden = true; btn.hidden = false; request();
+      });
+    });
+    $("[data-geo-write]").addEventListener("click", function () {
+      var w = f.querySelector('input[name="modo"][value="escribir"]');
+      w.checked = true; help.hidden = true; btn.hidden = false; syncModo(); showMsg("");
+      f.direccion.focus();
+    });
+
     btn.addEventListener("click", function () {
+      permState(function (state) {
+        if (state === "denied") return showHelp(); // bloqueada: el navegador no dejará preguntar de nuevo
+        request();
+      });
+    });
+
+    function request() {
       btn.disabled = true; btn.classList.add("is-busy");
       label.textContent = "Buscando tu ubicación…";
       showMsg("");
@@ -454,15 +531,25 @@
         });
       }, function (err) {
         btn.disabled = false; btn.classList.remove("is-busy");
-        label.textContent = "Intentar de nuevo";
-        showMsg(err && err.code === 1
-          ? "No diste permiso para usar tu ubicación. Puedes activarlo en tu navegador o elegir “Escribir la dirección”."
-          : "No pudimos obtener tu ubicación. Revisa que el GPS esté encendido o elige “Escribir la dirección”.");
+        label.textContent = "Usar mi ubicación actual";
+        if (err && err.code === 1) {
+          permState(function (state) {
+            if (state === "prompt") {
+              // cerró el aviso sin elegir: el botón lo vuelve a mostrar
+              showMsg("Cerraste el aviso sin elegir. Toca el botón otra vez y elige Permitir o Solo esta vez.");
+            } else {
+              showHelp();
+            }
+          });
+        } else {
+          showMsg("No pudimos obtener tu ubicación. Revisa que el GPS esté encendido e inténtalo de nuevo, o elige \u201CEscribir la dirección\u201D.");
+        }
       }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 });
-    });
+    }
 
     $("[data-geo-clear]").addEventListener("click", function () {
       setGeo(null);
+      help.hidden = true;
       label.textContent = "Usar mi ubicación actual";
       btn.focus();
     });
