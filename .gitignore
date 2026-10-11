@@ -1,0 +1,9 @@
+# Material original del cliente (pesado). La web usa las versiones optimizadas de "assets/".
+# tools/build_assets.py las regenera a partir de esta carpeta.
+Fotos y video/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/

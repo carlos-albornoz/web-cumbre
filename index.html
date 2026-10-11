@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cumbre · Hamburguesas de altura en Mérida</title>
+  <meta name="description" content="Cumbre: hamburguesas con nombre de pico andino en el C.C. Plaza Mayor, Mérida. Arma tu pedido en línea y envíalo por WhatsApp.">
+  <meta name="theme-color" content="#1D1D1B">
+  <meta property="og:title" content="Cumbre · Hamburguesas de altura">
+  <meta property="og:description" content="Elige tu pico, arma tu pedido y envíalo por WhatsApp. C.C. Plaza Mayor, Mérida.">
+  <meta property="og:image" content="assets/hero-poster.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero-poster.webp">
+  <link rel="stylesheet" href="css/styles.css?v=20261015">
+</head>
+<body>
+  <a class="skip" href="#menu">Saltar al menú</a>
+
+  <!-- ============ CABECERA ============ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#inicio" aria-label="Cumbre, ir al inicio">
+      <img src="assets/isotipo.png" alt="" width="40" height="38">
+      <img class="nav__word" src="assets/logo-cumbre-claro.png" alt="Cumbre" width="132" height="25">
+    </a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="#menu">Menú</a>
+      <a href="#como-pedir">Cómo pedir</a>
+      <a href="#visitanos">Horario</a>
+    </nav>
+    <button class="nav__cart" type="button" data-open-cart aria-label="Abrir el carrito">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1.2 11.1a2 2 0 0 1-2 1.9H9.2a2 2 0 0 1-2-1.9L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+      <span class="nav__cart-label">Pedido</span>
+      <span class="badge" data-cart-count aria-live="polite">0</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ============ HERO: video limpio, texto entra con retraso ============ -->
+    <section class="hero" id="inicio" aria-label="Cumbre">
+      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.webp" aria-hidden="true">
+        <source src="assets/hero-540.mp4" type="video/mp4" media="(max-width: 760px)">
+        <source src="assets/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <img class="hero__iso" src="assets/isotipo.png" alt="" width="96" height="92">
+        <h1 class="hero__title">
+          <img src="assets/logo-cumbre.png" alt="Cumbre" width="1600" height="298">
+        </h1>
+        <p class="hero__lead">Hamburguesas de altura. Cada una lleva el nombre de un pico de los Andes, y se arma a mano en Mérida.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="#menu">Elige tu pico</a>
+          <button class="btn btn--ghost" type="button" data-open-cart>Ver mi pedido</button>
+        </div>
+      </div>
+
+      <a class="hero__scroll" href="#menu" aria-label="Bajar al menú">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ============ MENÚ con fondo de montañas ============ -->
+    <section class="menu" id="menu" aria-labelledby="menu-title">
+      <div class="menu__bg" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <header class="menu__head">
+          <p class="eyebrow">El menú</p>
+          <h2 id="menu-title" class="display">Elige tu <em>pico</em></h2>
+          <p class="menu__intro">Cada hamburguesa lleva la altitud de su montaña. Las de carne incluyen papas chips o yuquitas fritas; las de pollo y chuleta vienen con papas chips. Al añadir cada hamburguesa eliges sus adicionales.</p>
+        </header>
+
+        <div class="filters" role="toolbar" aria-label="Filtrar el menú">
+          <div class="filters__chips">
+            <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Todo</button>
+            <button type="button" class="chip" data-filter="carne" aria-pressed="false">Con carne</button>
+            <button type="button" class="chip" data-filter="pollo" aria-pressed="false">Pollo y chuleta</button>
+            <button type="button" class="chip" data-filter="combos" aria-pressed="false">Combos</button>
+            <button type="button" class="chip" data-filter="extras" aria-pressed="false">Entradas, platos y bebidas</button>
+          </div>
+          <button type="button" class="sort" data-sort aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 19 6-10 4 6 3-4 5 8H3Z"/></svg>
+            <span>Ordenar por altura</span>
+          </button>
+        </div>
+
+<!-- MENU:START -->
+        <div class="grid" data-grid>
+        <article class="card card--feature" data-cat="carne" data-id="pico-bolivar" data-name="Pico Bolívar" data-price="12" data-alt="4978" data-custom>
+          <div class="card__media"><span class="card__badge">El pico más alto</span><img src="assets/menu/pico-bolivar.webp" alt="Pico Bolívar" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.978 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico Bolívar</h3>
+            <p class="card__desc">Pan de papa de 110 g, 130 g de lomito marinado en chimichurri, 130 g de pollo, pico de gallo, queso llanero asado, aguacate, chorizo de cerdo ahumado y tártara.</p>
+            
+            <div class="card__foot">
+              <span class="price">$12</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico Bolívar al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="pico-la-torre" data-name="Pico La Torre" data-price="13" data-alt="4547" data-custom>
+          <div class="card__media"><img src="assets/menu/pico-la-torre.webp" alt="Pico La Torre" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.547 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico La Torre</h3>
+            <p class="card__desc">Pan de papa de 110 g, stick fries, 150 g de carne de res, 150 g de pechuga de pollo, 150 g de chuleta ahumada, queso Facilita Kraft, pepinillos, tocineta y salsas de la casa.</p>
+            
+            <div class="card__foot">
+              <span class="price">$13</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico La Torre al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="double-cheese-bacon" data-name="Double Cheese &amp; Bacon" data-price="9" data-alt="0" data-custom>
+          <div class="card__media"><img src="assets/menu/double-cheese-bacon.webp" alt="Double Cheese &amp; Bacon" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Double Cheese &amp; Bacon</h3>
+            <p class="card__desc">Pan de papa de 110 g, 200 g de carne de res cubierta con queso Facilita Kraft, tocineta crocante, pepinillos de la casa, cebolla, salsa de tomate y BBQ de la casa.</p>
+            
+            <div class="card__foot">
+              <span class="price">$9</span>
+              <button class="add" type="button" data-add aria-label="Añadir Double Cheese &amp; Bacon al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="pico-codazzi" data-name="Pico Codazzi" data-price="9" data-alt="4775" data-custom>
+          <div class="card__media"><img src="assets/menu/pico-codazzi.webp" alt="Pico Codazzi" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.775 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico Codazzi</h3>
+            <p class="card__desc">Pan de papa de 110 g, 150 g de carne de res, lechuga, queso asado, tocineta, piña asada con miel de papelón, mayomostaza y salsa BBQ de la casa.</p>
+            
+            <div class="card__foot">
+              <span class="price">$9</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico Codazzi al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="bosque-pino" data-name="Bosque Pino" data-price="9" data-alt="2500" data-custom>
+          <div class="card__media"><img src="assets/menu/bosque-pino.webp" alt="Bosque Pino" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>2.500 m.s.n.m.</span></p>
+            <h3 class="card__name">Bosque Pino</h3>
+            <p class="card__desc">Pan de papa de 110 g, 150 g de carne de res cubierta con fondue de queso mozzarella, cebollas caramelizadas en vino de mora, tocineta, lechuga, tomate y salsas clásicas.</p>
+            
+            <div class="card__foot">
+              <span class="price">$9</span>
+              <button class="add" type="button" data-add aria-label="Añadir Bosque Pino al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="pico-humboldt" data-name="Pico Humboldt" data-price="8.5" data-alt="4940" data-custom>
+          <div class="card__media"><img src="assets/menu/pico-humboldt.webp" alt="Pico Humboldt" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.940 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico Humboldt</h3>
+            <p class="card__desc">Pan de papa de 110 g, 150 g de carne de res, ensalada rallada, stick fries, huevo frito, aguacate, tocineta y tártara.</p>
+            
+            <div class="card__foot">
+              <span class="price">$8,50</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico Humboldt al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="pico-toro" data-name="Pico Toro" data-price="8" data-alt="4755" data-custom>
+          <div class="card__media"><img src="assets/menu/pico-toro.webp" alt="Pico Toro" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.755 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico Toro</h3>
+            <p class="card__desc">Pan de papa de 80 g, 150 g de lomito marinado en chimichurri, pico de gallo, queso llanero asado, aguacate y tártara.</p>
+            
+            <div class="card__foot">
+              <span class="price">$8</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico Toro al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="pico-leon" data-name="Pico León" data-price="6.5" data-alt="4720" data-custom>
+          <div class="card__media"><img src="assets/menu/pico-leon.webp" alt="Pico León" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.720 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico León</h3>
+            <p class="card__desc">Pan de papa de 80 g, 100 g de carne de res cubierta con fondue de queso mozzarella, cebollas caramelizadas, lechuga, tomate y tártara.</p>
+            
+            <div class="card__foot">
+              <span class="price">$6,50</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico León al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="carne" data-id="cheeseburger" data-name="Cheeseburger" data-price="6" data-alt="0" data-custom>
+          <div class="card__media"><img src="assets/menu/cheeseburger.webp" alt="Cheeseburger" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Cheeseburger</h3>
+            <p class="card__desc">Pan de papa de 80 g, 100 g de carne de res, queso Facilita Kraft, cebolla, pepinillos de la casa, salsa de tomate y BBQ de la casa.</p>
+            
+            <div class="card__foot">
+              <span class="price">$6</span>
+              <button class="add" type="button" data-add aria-label="Añadir Cheeseburger al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="pollo" data-id="pico-la-concha" data-name="Pico La Conchá" data-price="9" data-alt="4922" data-custom>
+          <div class="card__media"><img src="assets/menu/pico-la-concha.webp" alt="Pico La Conchá" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.922 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico La Conchá</h3>
+            <p class="card__desc">Con chuleta. Pan de papa de 110 g, 150 g de chuleta ahumada con BBQ, ensalada coleslaw y crujientes aros de cebolla.</p>
+            
+            <div class="card__foot">
+              <span class="price">$9</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico La Conchá al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="pollo" data-id="pico-bonpland" data-name="Pico Bonpland" data-price="10" data-alt="4823" data-custom data-options="Crispy|A la plancha">
+          <div class="card__media"><img src="assets/menu/pico-bonpland.webp" alt="Pico Bonpland" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.823 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico Bonpland</h3>
+            <p class="card__desc">Pan de papa de 110 g, 150 g de pechuga de pollo bañada con champiñones salteados con tocineta en crema de leche, stick fries y queso de año.</p>
+            <p class="card__opt">Crispy o a la plancha, tú eliges</p>
+            <div class="card__foot">
+              <span class="price">$10</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico Bonpland al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="pollo" data-id="pico-aguila" data-name="Pico Águila" data-price="9" data-alt="4118" data-custom data-options="Crispy|A la plancha">
+          <div class="card__media"><img src="assets/menu/pico-aguila.webp" alt="Pico Águila" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>4.118 m.s.n.m.</span></p>
+            <h3 class="card__name">Pico Águila</h3>
+            <p class="card__desc">Pan de papa de 110 g, 150 g de pechuga de pollo, tomate, lechuga, dip de ajoporro, tocineta y salsas clásicas.</p>
+            <p class="card__opt">Crispy o a la plancha, tú eliges</p>
+            <div class="card__foot">
+              <span class="price">$9</span>
+              <button class="add" type="button" data-add aria-label="Añadir Pico Águila al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="pollo" data-id="mucubaji" data-name="Mucubají" data-price="9" data-alt="3628" data-custom data-options="Crispy|A la plancha">
+          <div class="card__media"><img src="assets/menu/mucubaji.webp" alt="Mucubají" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__alt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 20 7-12 4 6 3-4 6 10H2Z"/></svg><span>3.628 m.s.n.m.</span></p>
+            <h3 class="card__name">Mucubají</h3>
+            <p class="card__desc">Pan de papa de 110 g, 150 g de pechuga de pollo, ensalada César, tocineta y queso de año.</p>
+            <p class="card__opt">Crispy o a la plancha, tú eliges</p>
+            <div class="card__foot">
+              <span class="price">$9</span>
+              <button class="add" type="button" data-add aria-label="Añadir Mucubají al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-cat="pollo" data-id="sanguchito-de-pollo" data-name="Sanguchito de Pollo" data-price="8" data-alt="0" data-custom>
+          <div class="card__media"><img src="assets/menu/sanguchito-de-pollo.webp" alt="Sanguchito de Pollo" width="520" height="520" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Sanguchito de Pollo</h3>
+            <p class="card__desc">Pan de papa de 80 g, 140 g de pollo crispy, queso Facilita Kraft, pepinillos de la casa, tocineta ahumada, salsa de tomate y BBQ de la casa.</p>
+            
+            <div class="card__foot">
+              <span class="price">$8</span>
+              <button class="add" type="button" data-add aria-label="Añadir Sanguchito de Pollo al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        </div>
+        <h3 class="subhead" data-cat="combos">Combos <span>para subir en grupo</span></h3>
+        <div class="grid grid--combos">
+        <article class="card card--combo" data-cat="combos" data-id="combo-sierra-nevada" data-name="Sierra Nevada" data-price="28" data-alt="0">
+          <div class="card__media"><img src="assets/menu/combo-sierra-nevada.webp" alt="Sierra Nevada" width="720" height="228" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Sierra Nevada</h3>
+            <p class="card__desc">Cheeseburger, Pico León, Bosque Pino y Pico Humboldt, más un refresco de 1,5 L.</p>
+            
+            <div class="card__foot">
+              <span class="price">$28</span>
+              <button class="add" type="button" data-add aria-label="Añadir Sierra Nevada al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card card--combo" data-cat="combos" data-id="combo-lomito" data-name="Combo Lomito" data-price="18" data-alt="0">
+          <div class="card__media"><img src="assets/menu/combo-lomito.webp" alt="Combo Lomito" width="720" height="228" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Combo Lomito</h3>
+            <p class="card__desc">Pico Bolívar y Pico Toro, más un refresco de 1 L.</p>
+            
+            <div class="card__foot">
+              <span class="price">$18</span>
+              <button class="add" type="button" data-add aria-label="Añadir Combo Lomito al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card card--combo" data-cat="combos" data-id="combo-chicken" data-name="Combo Chicken" data-price="18" data-alt="0">
+          <div class="card__media"><img src="assets/menu/combo-chicken.webp" alt="Combo Chicken" width="720" height="228" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Combo Chicken</h3>
+            <p class="card__desc">Dos burgers de pollo a escoger, más un refresco de 1 L.</p>
+            <fieldset class="opts"><legend class="sr">Preparación del pollo</legend><label><input type="radio" name="opt-combo-chicken" value="Crispy" checked><span>Crispy</span></label><label><input type="radio" name="opt-combo-chicken" value="A la plancha"><span>A la plancha</span></label></fieldset>
+            <div class="card__foot">
+              <span class="price">$18</span>
+              <button class="add" type="button" data-add aria-label="Añadir Combo Chicken al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card card--combo" data-cat="combos" data-id="combo-1y1" data-name="Combo 1 y 1" data-price="18" data-alt="0">
+          <div class="card__media"><img src="assets/menu/combo-1y1.webp" alt="Combo 1 y 1" width="720" height="228" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Combo 1 y 1</h3>
+            <p class="card__desc">Una burger de carne y una de pollo a escoger, más un refresco de 1 L. No incluye Pico Bolívar ni Pico La Torre.</p>
+            
+            <div class="card__foot">
+              <span class="price">$18</span>
+              <button class="add" type="button" data-add aria-label="Añadir Combo 1 y 1 al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card card--combo" data-cat="combos" data-id="combo-cheese-chips" data-name="Cheeseburger x4 con chips" data-price="18" data-alt="0">
+          <div class="card__media"><img src="assets/menu/combo-cheese-chips.webp" alt="Cheeseburger x4 con chips" width="720" height="228" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Cheeseburger x4 con chips</h3>
+            <p class="card__desc">Cuatro cheeseburgers con 2 raciones de papas chips.</p>
+            
+            <div class="card__foot">
+              <span class="price">$18</span>
+              <button class="add" type="button" data-add aria-label="Añadir Cheeseburger x4 con chips al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        <article class="card card--combo" data-cat="combos" data-id="combo-cheese-4" data-name="Cheeseburger x4" data-price="16" data-alt="0">
+          <div class="card__media"><img src="assets/menu/combo-cheese-4.webp" alt="Cheeseburger x4" width="720" height="228" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            
+            <h3 class="card__name">Cheeseburger x4</h3>
+            <p class="card__desc">Cuatro cheeseburgers, sin papas chips.</p>
+            
+            <div class="card__foot">
+              <span class="price">$16</span>
+              <button class="add" type="button" data-add aria-label="Añadir Cheeseburger x4 al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Añadir al carrito</span></button>
+            </div>
+          </div>
+        </article>
+        </div>
+        <h3 class="subhead" data-cat="extras">Para acompañar <span>entradas, platos, bebidas y extras</span></h3>
+        <div class="carta" data-cat="extras">
+          <section class="carta__group">
+            <h4 class="carta__title">Entradas</h4>
+            
+            <ul>
+              <li class="row" data-id="servicio-chips" data-name="Servicio de chips" data-price="5">
+                <div class="row__txt"><span class="row__name">Servicio de chips</span><small>Con 2 salsas a escoger.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$5</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Servicio de chips al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="tequenos" data-name="Tequeños" data-price="6">
+                <div class="row__txt"><span class="row__name">Tequeños</span><small>Acompañados de salsa tártara.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$6</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Tequeños al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="papas-francesas" data-name="Servicio de papas francesas" data-price="6">
+                <div class="row__txt"><span class="row__name">Servicio de papas francesas</span><small>Con 2 salsas a escoger.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$6</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Servicio de papas francesas al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="tenders" data-name="Tenders de pollo" data-price="7">
+                <div class="row__txt"><span class="row__name">Tenders de pollo</span><small>Con papas francesas y salsa a escoger.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$7</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Tenders de pollo al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="ensalada-cesar" data-name="Ensalada César" data-price="9">
+                <div class="row__txt"><span class="row__name">Ensalada César</span><small>Con pollo crispy o a la plancha.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$9</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Ensalada César al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="papas-la-culata" data-name="Papas La Culata" data-price="9">
+                <div class="row__txt"><span class="row__name">Papas La Culata</span><small>Bañadas en fondue de queso mozzarella, tocineta y maíz.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$9</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Papas La Culata al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="papas-mifafi" data-name="Papas Mifafi" data-price="11">
+                <div class="row__txt"><span class="row__name">Papas Mifafi</span><small>Con chuleta, lomito o pollo a la plancha, tocineta, maíz, salsas clásicas y queso de año.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$11</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Papas Mifafi al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+            </ul>
+          </section>
+          <section class="carta__group">
+            <h4 class="carta__title">Platos</h4>
+            <p class="carta__note">Con acompañante: papas francesas, chips, puré de papa, ensalada César o coleslaw.</p>
+            <ul>
+              <li class="row" data-id="pollo-plancha-crispy" data-name="Pollo a la plancha o crispy" data-price="8">
+                <div class="row__txt"><span class="row__name">Pollo a la plancha o crispy</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$8</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Pollo a la plancha o crispy al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="chuleta-bbq" data-name="Chuleta ahumada con salsa BBQ" data-price="8">
+                <div class="row__txt"><span class="row__name">Chuleta ahumada con salsa BBQ</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$8</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Chuleta ahumada con salsa BBQ al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="lomito-salteado" data-name="Lomito salteado con cebolla y pimentón en salsa BBQ" data-price="9">
+                <div class="row__txt"><span class="row__name">Lomito salteado con cebolla y pimentón en salsa BBQ</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$9</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Lomito salteado con cebolla y pimentón en salsa BBQ al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="lomito-gratinado" data-name="Lomito gratinado con fondue de queso mozzarella" data-price="9">
+                <div class="row__txt"><span class="row__name">Lomito gratinado con fondue de queso mozzarella</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$9</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Lomito gratinado con fondue de queso mozzarella al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="pechuga-parmigiana" data-name="Pechuga a la parmigiana" data-price="9">
+                <div class="row__txt"><span class="row__name">Pechuga a la parmigiana</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$9</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Pechuga a la parmigiana al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="pollo-crema-champinones" data-name="Pollo en crema blanca de champiñones y tocineta" data-price="10">
+                <div class="row__txt"><span class="row__name">Pollo en crema blanca de champiñones y tocineta</span><small>A la plancha o crispy.</small></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$10</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Pollo en crema blanca de champiñones y tocineta al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+            </ul>
+          </section>
+          <section class="carta__group">
+            <h4 class="carta__title">Bebidas</h4>
+            
+            <ul>
+              <li class="row" data-id="refresco-personal" data-name="Refresco personal" data-price="1">
+                <div class="row__txt"><span class="row__name">Refresco personal</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$1</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Refresco personal al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="refresco-1l" data-name="Refresco 1 L" data-price="2.5">
+                <div class="row__txt"><span class="row__name">Refresco 1 L</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$2,50</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Refresco 1 L al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="refresco-15l" data-name="Refresco 1,5 L" data-price="3">
+                <div class="row__txt"><span class="row__name">Refresco 1,5 L</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$3</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Refresco 1,5 L al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+              <li class="row" data-id="refresco-2l" data-name="Refresco 2 L" data-price="3.5">
+                <div class="row__txt"><span class="row__name">Refresco 2 L</span></div>
+                <span class="row__dots" aria-hidden="true"></span>
+                <span class="price">$3,50</span>
+                <button class="add add--icon" type="button" data-add aria-label="Añadir Refresco 2 L al carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </li>
+            </ul>
+          </section>
+        </div>
+<!-- MENU:END -->
+      </div>
+    </section>
+
+    <!-- ============ MASCOTA + CÓMO PEDIR ============ -->
+    <section class="guide" id="como-pedir" aria-labelledby="guide-title">
+      <div class="guide__art" aria-hidden="true">
+        <img src="assets/mascota.webp" alt="" width="1200" height="1473" loading="lazy">
+      </div>
+      <div class="wrap guide__inner">
+        <div class="guide__copy">
+          <p class="eyebrow">El guardián de la Cumbre</p>
+          <h2 id="guide-title" class="display">De la cima<br>a tu mesa en <em>3 pasos</em></h2>
+          <p class="guide__lead">Nuestro oso vive entre picos y no deja bajar una hamburguesa de la montaña sin que esté perfecta. Él te acompaña en todo el pedido.</p>
+          <ol class="steps">
+            <li>
+              <span class="steps__n">01</span>
+              <div><h3>Elige tu pico</h3><p>Añade al carrito las hamburguesas, combos y extras que quieras.</p></div>
+            </li>
+            <li>
+              <span class="steps__n">02</span>
+              <div><h3>Revisa tu pedido</h3><p>Ajusta cantidades, indica si es delivery o retiro y cómo vas a pagar.</p></div>
+            </li>
+            <li>
+              <span class="steps__n">03</span>
+              <div><h3>Envíalo por WhatsApp</h3><p>Te llega el pedido escrito y con el total. Solo tienes que darle a enviar.</p></div>
+            </li>
+          </ol>
+          <button class="btn btn--primary" type="button" data-open-cart>Ver mi pedido</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VISÍTANOS ============ -->
+    <section class="visit" id="visitanos" aria-labelledby="visit-title">
+      <div class="wrap">
+        <header class="visit__head">
+          <p class="eyebrow">Visítanos</p>
+          <h2 id="visit-title" class="display">Campamento <em>base</em></h2>
+          <p class="status" data-status><span class="status__dot"></span><span data-status-text>Horario de atención</span></p>
+        </header>
+
+        <div class="visit__grid">
+          <article class="panel panel--hours">
+            <h3 class="panel__title">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              Horario
+            </h3>
+            <ul class="hours">
+              <li data-day="1"><span>Lunes</span><strong class="is-closed">Cerrado</strong></li>
+              <li data-day="2"><span>Martes</span><strong>5:00 a 10:00 p.m.</strong></li>
+              <li data-day="3"><span>Miércoles</span><strong>1:00 a 10:00 p.m.</strong></li>
+              <li data-day="4"><span>Jueves</span><strong>1:00 a 10:00 p.m.</strong></li>
+              <li data-day="5"><span>Viernes</span><strong>1:00 a 10:00 p.m.</strong></li>
+              <li data-day="6"><span>Sábado</span><strong>1:00 a 10:00 p.m.</strong></li>
+              <li data-day="0"><span>Domingo</span><strong>1:00 a 10:00 p.m.</strong></li>
+            </ul>
+          </article>
+
+          <article class="panel">
+            <h3 class="panel__title">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              Dirección
+            </h3>
+            <p class="panel__big">C.C. Plaza Mayor</p>
+            <p class="panel__text">Mérida, Venezuela 5101</p>
+            <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Centro+Comercial+Plaza+Mayor+M%C3%A9rida+Venezuela" target="_blank" rel="noopener">Cómo llegar</a>
+
+            <h3 class="panel__title panel__title--spaced">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h2l2-5h6l2 5h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M14 7h3l2 5"/></svg>
+              Delivery
+            </h3>
+            <a class="panel__big panel__phone" href="tel:+584168769923">0416-876 99 23</a>
+          </article>
+
+          <article class="panel">
+            <h3 class="panel__title">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" class="fill"/></svg>
+              Instagram
+            </h3>
+            <a class="panel__big" href="https://www.instagram.com/cumbre.mda/" target="_blank" rel="noopener">@cumbre.mda</a>
+            <p class="panel__text">Novedades, combos del día y fotos recién salidas de la plancha.</p>
+
+            <h3 class="panel__title panel__title--spaced">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg>
+              Formas de pago
+            </h3>
+            <ul class="pay">
+              <li>Pago móvil</li><li>Efectivo</li><li>Zelle</li><li>Binance</li><li>Zinli</li><li>Transferencia</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="foot">
+    <div class="foot__bear" aria-hidden="true">
+      <img src="assets/mascota-cara.webp" alt="" width="320" height="320" loading="lazy">
+    </div>
+    <div class="wrap foot__inner">
+      <img class="foot__logo" src="assets/logo-cumbre.png" alt="Cumbre" width="1600" height="298" loading="lazy">
+      <p class="foot__tag">Hamburguesas de altura · C.C. Plaza Mayor, Mérida</p>
+      <nav class="foot__links" aria-label="Enlaces">
+        <a href="https://www.instagram.com/cumbre.mda/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/584168769923" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#menu">Menú</a>
+      </nav>
+      <p class="foot__copy">© <span data-year>2026</span> Cumbre. Todos los derechos reservados.</p>
+      <p class="foot__credit"><a href="https://web-keho.vercel.app/" target="_blank" rel="noopener">desarrollado por <strong>KEHO</strong></a></p>
+    </div>
+  </footer>
+
+  <!-- ============ BARRA DE PEDIDO (aparece con productos) ============ -->
+  <button class="orderbar" type="button" data-open-cart data-orderbar aria-label="Ver mi pedido">
+    <span class="orderbar__count"><span data-cart-count>0</span> <span data-cart-word>productos</span></span>
+    <span class="orderbar__cta">Ver pedido</span>
+    <span class="orderbar__total" data-cart-total>$0</span>
+  </button>
+
+  <!-- ============ AVISO DE LA MASCOTA ============ -->
+  <div class="toast" data-toast role="status" aria-live="polite">
+    <img src="assets/mascota-cara.webp" alt="" width="48" height="48">
+    <p data-toast-text>¡A la mochila!</p>
+  </div>
+
+  <!-- ============ PERSONALIZAR HAMBURGUESA (adicionales por hamburguesa) ============ -->
+  <div class="sheet-scrim" data-sheet-close hidden></div>
+  <div class="sheet" data-sheet role="dialog" aria-modal="true" aria-labelledby="sheet-title" aria-hidden="true" tabindex="-1">
+    <header class="sheet__head">
+      <img class="sheet__img" data-sheet-img src="assets/menu/cheeseburger.webp" alt="" width="96" height="96">
+      <div class="sheet__titles">
+        <p class="sheet__alt" data-sheet-alt></p>
+        <h2 class="sheet__title" id="sheet-title" data-sheet-name>Hamburguesa</h2>
+        <p class="sheet__base">Precio base <strong data-sheet-base>$0</strong></p>
+      </div>
+      <button class="icon-btn" type="button" data-sheet-close aria-label="Cerrar sin añadir">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="sheet__body">
+      <fieldset class="sheet__block" data-sheet-opts hidden>
+        <legend class="sheet__label">¿Cómo quieres el pollo?</legend>
+        <div class="seg" data-sheet-opts-list></div>
+      </fieldset>
+
+      <fieldset class="sheet__block">
+        <legend class="sheet__label">¿Le agregamos algo? <em>Opcional</em></legend>
+        <p class="sheet__hint">Estos adicionales van solo en esta hamburguesa.</p>
+        <div class="xtras" data-sheet-extras>
+<!-- EXTRAS:START -->
+            <label class="xtra"><input type="checkbox" value="add-queso-kraft" data-name="Queso Facilita Kraft" data-price="1"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Queso Facilita Kraft</span><span class="xtra__price">+$1</span></label>
+            <label class="xtra"><input type="checkbox" value="add-queso-asado" data-name="Queso asado" data-price="1"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Queso asado</span><span class="xtra__price">+$1</span></label>
+            <label class="xtra"><input type="checkbox" value="add-cebolla-caramelizada" data-name="Cebollas caramelizadas" data-price="1"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Cebollas caramelizadas</span><span class="xtra__price">+$1</span></label>
+            <label class="xtra"><input type="checkbox" value="add-huevo" data-name="Huevo" data-price="1"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Huevo</span><span class="xtra__price">+$1</span></label>
+            <label class="xtra"><input type="checkbox" value="add-aguacate" data-name="Aguacate" data-price="1"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Aguacate</span><span class="xtra__price">+$1</span></label>
+            <label class="xtra"><input type="checkbox" value="add-maiz" data-name="Maíz" data-price="1"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Maíz</span><span class="xtra__price">+$1</span></label>
+            <label class="xtra"><input type="checkbox" value="add-fondue" data-name="Fondue de queso mozzarella" data-price="1.5"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Fondue de queso mozzarella</span><span class="xtra__price">+$1,50</span></label>
+            <label class="xtra"><input type="checkbox" value="add-cebolla-vino" data-name="Cebollas caramelizadas en vino" data-price="1.5"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Cebollas caramelizadas en vino</span><span class="xtra__price">+$1,50</span></label>
+            <label class="xtra"><input type="checkbox" value="add-tocineta" data-name="Tocineta" data-price="1.5"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Tocineta</span><span class="xtra__price">+$1,50</span></label>
+            <label class="xtra"><input type="checkbox" value="add-champinones" data-name="Champiñones" data-price="1.5"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Champiñones</span><span class="xtra__price">+$1,50</span></label>
+            <label class="xtra"><input type="checkbox" value="add-chorizo" data-name="Chorizo" data-price="2"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Chorizo</span><span class="xtra__price">+$2</span></label>
+            <label class="xtra"><input type="checkbox" value="add-carne" data-name="Carne 150 g" data-price="2"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Carne 150 g</span><span class="xtra__price">+$2</span></label>
+            <label class="xtra"><input type="checkbox" value="add-pollo-plancha" data-name="Pollo a la plancha" data-price="2"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Pollo a la plancha</span><span class="xtra__price">+$2</span></label>
+            <label class="xtra"><input type="checkbox" value="add-lomito" data-name="Lomito 150 g" data-price="2.5"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Lomito 150 g</span><span class="xtra__price">+$2,50</span></label>
+            <label class="xtra"><input type="checkbox" value="add-chuleta" data-name="Chuleta" data-price="2.5"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Chuleta</span><span class="xtra__price">+$2,50</span></label>
+            <label class="xtra"><input type="checkbox" value="add-pollo-crispy" data-name="Pollo crispy" data-price="2.5"><span class="xtra__box" aria-hidden="true"></span><span class="xtra__name">Pollo crispy</span><span class="xtra__price">+$2,50</span></label>
+            <!-- EXTRAS:END -->
+        </div>
+      </fieldset>
+
+      <label class="sheet__block field">
+        <span class="sheet__label">Indicaciones para esta hamburguesa <em>Opcional</em></span>
+        <input type="text" data-sheet-note maxlength="120" placeholder="Ej.: sin cebolla, término bien cocido">
+      </label>
+    </div>
+
+    <footer class="sheet__foot">
+      <div class="stepper stepper--lg" role="group" aria-label="Cantidad">
+        <button type="button" data-sheet-step="-1" aria-label="Una menos">−</button>
+        <output data-sheet-qty>1</output>
+        <button type="button" data-sheet-step="1" aria-label="Una más">+</button>
+      </div>
+      <button class="btn btn--primary sheet__add" type="button" data-sheet-add>
+        Añadir <span data-sheet-total>$0</span>
+      </button>
+    </footer>
+  </div>
+
+  <!-- ============ CARRITO ============ -->
+  <div class="scrim" data-close-cart hidden></div>
+  <aside class="cart" id="cart" aria-label="Tu pedido" aria-hidden="true" tabindex="-1">
+    <header class="cart__head">
+      <img class="cart__bear" src="assets/mascota-cara.webp" alt="" width="56" height="56">
+      <div>
+        <h2 class="cart__title">Tu pedido</h2>
+        <p class="cart__sub" data-cart-sub>Todavía no has elegido nada</p>
+      </div>
+      <button class="icon-btn" type="button" data-close-cart aria-label="Cerrar el carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="cart__body">
+      <div class="cart__empty" data-cart-empty>
+        <img src="assets/mascota-cara.webp" alt="" width="140" height="140" loading="lazy">
+        <p class="cart__empty-title">Tu mochila está vacía</p>
+        <p>El oso dice que ninguna expedición empieza sin una hamburguesa.</p>
+        <button class="btn btn--primary" type="button" data-close-cart data-goto-menu>Ver el menú</button>
+      </div>
+
+      <ul class="lines" data-cart-lines></ul>
+
+      <form class="checkout" data-checkout novalidate>
+        <h3 class="checkout__title">Datos para el pedido</h3>
+        <label class="field">
+          <span>Tu nombre</span>
+          <input type="text" name="nombre" autocomplete="name" placeholder="¿A nombre de quién?" maxlength="60" required>
+        </label>
+
+        <fieldset class="field field--seg">
+          <legend>Entrega</legend>
+          <div class="seg">
+            <label><input type="radio" name="entrega" value="Delivery" checked><span>Delivery</span></label>
+            <label><input type="radio" name="entrega" value="Retiro en el local"><span>Retiro en el local</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field" data-address-field>
+          <span>¿Cómo nos dices dónde entregar?</span>
+          <div class="seg seg--modo" role="radiogroup" aria-label="Forma de indicar la dirección" data-modo>
+            <label><input type="radio" name="modo" value="ubicacion" checked><span>📍 Compartir mi ubicación</span></label>
+            <label><input type="radio" name="modo" value="escribir"><span>✍️ Escribir la dirección</span></label>
+          </div>
+          <div class="geo" data-geo>
+            <button class="geo__btn" type="button" data-geo-btn>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7"/></svg>
+              <span data-geo-label>Usar mi ubicación actual</span>
+            </button>
+            <div class="geo__ok" data-geo-ok hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <div>
+                <strong>Ubicación lista</strong>
+                <small data-geo-acc></small>
+              </div>
+              <a data-geo-map href="#" target="_blank" rel="noopener">Ver en el mapa</a>
+              <button type="button" data-geo-clear aria-label="Quitar la ubicación">Quitar</button>
+            </div>
+            <p class="geo__msg" data-geo-msg role="status"></p>
+          </div>
+          <label class="addr-label" for="direccion" data-addr-label>Punto de referencia <em>(opcional)</em></label>
+          <textarea id="direccion" name="direccion" rows="2" autocomplete="street-address" placeholder="Sector, calle, casa o edificio y un punto de referencia" maxlength="240"></textarea>
+        </div>
+
+        <label class="field">
+          <span>Forma de pago</span>
+          <select name="pago">
+            <option>Pago móvil</option>
+            <option>Efectivo</option>
+            <option>Zelle</option>
+            <option>Binance</option>
+            <option>Zinli</option>
+            <option>Transferencia</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Notas <em>(opcional)</em></span>
+          <textarea name="notas" rows="2" placeholder="Sin cebolla, salsas aparte, etc." maxlength="240"></textarea>
+        </label>
+        <p class="form-error" data-form-error role="alert"></p>
+      </form>
+    </div>
+
+    <footer class="cart__foot" data-cart-foot>
+      <div class="cart__total">
+        <span>Total</span>
+        <strong data-cart-total>$0</strong>
+      </div>
+      <p class="cart__note" data-delivery-note>El costo del delivery se confirma por WhatsApp.</p>
+      <button class="btn btn--wa" type="button" data-checkout-btn>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="fill" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 11.5 11.5 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+        Pedir por WhatsApp
+      </button>
+      <button class="cart__clear" type="button" data-clear-cart>Vaciar pedido</button>
+    </footer>
+  </aside>
+
+  <script defer src="js/main.js?v=20261015"></script>
+</body>
+</html>
