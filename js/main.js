@@ -379,9 +379,7 @@
     out.push("👤 Nombre: " + f.nombre.value.trim());
     if (f.entrega.value === "Delivery") {
       out.push("🛵 Entrega: Delivery");
-      var g = usingGeo() ? geo : null;
-      if (g) out.push("📍 Mi ubicación: https://maps.google.com/?q=" + g.lat + "," + g.lng);
-      if (f.direccion.value.trim()) out.push((g ? "🏠 Referencia: " : "📍 Dirección: ") + f.direccion.value.trim());
+      out.push("📍 Dirección: " + f.direccion.value.trim());
     } else {
       out.push("🏔️ Entrega: Retiro en el local (C.C. Plaza Mayor)");
     }
@@ -392,181 +390,11 @@
     return out.join("\n");
   }
 
-  /* ------------------------------------------------------------------
-     UBICACIÓN DEL CLIENTE (GPS del teléfono, siempre con su permiso)
-     El navegador muestra su propio aviso "¿Permitir ubicación?". Solo se usa
-     para el mensaje de WhatsApp; no se guarda en ningún lado.
-     ------------------------------------------------------------------ */
-  var geo = null;
-  function modo() {
-    var r = els.form && els.form.querySelector('input[name="modo"]:checked');
-    return r ? r.value : "escribir";
-  }
-  function usingGeo() { return modo() === "ubicacion" && !!geo; }
-
-  function initGeo() {
-    var btn = $("[data-geo-btn]"); if (!btn) return;
-    var label = $("[data-geo-label]"), msg = $("[data-geo-msg]"), ok = $("[data-geo-ok]");
-    var f = els.form;
-
-    function showMsg(t) { msg.textContent = t || ""; }
-    var geoBox = $("[data-geo]"), addrLabel = $("[data-addr-label]");
-    function syncModo() {
-      var m = modo();
-      geoBox.hidden = m !== "ubicacion";
-      addrLabel.innerHTML = m === "ubicacion" ? "Punto de referencia <em>(opcional)</em>" : "Dirección de entrega";
-      f.direccion.placeholder = m === "ubicacion"
-        ? "Casa, piso, color del portón o algo cercano"
-        : "Sector, calle, casa o edificio y un punto de referencia";
-      els.error.textContent = "";
-      var fld = f.direccion.closest(".field"); if (fld) fld.classList.remove("is-invalid");
-    }
-    $$('input[name="modo"]', f).forEach(function (r) { r.addEventListener("change", syncModo); });
-    function setGeo(g) {
-      geo = g;
-      ok.hidden = !g; btn.hidden = !!g;
-      if (g) {
-        $("[data-geo-map]").href = "https://maps.google.com/?q=" + g.lat + "," + g.lng;
-        $("[data-geo-acc]").textContent = g.acc ? "Precisión aproximada: " + g.acc + " m" : "";
-        var fld = f.direccion.closest(".field"); if (fld) fld.classList.remove("is-invalid");
-        els.error.textContent = "";
-      }
-    }
-
-    if (!("geolocation" in navigator) || !window.isSecureContext) {
-      $("[data-modo]").hidden = true; // sin GPS disponible: queda solo la dirección escrita
-      f.querySelector('input[name="modo"][value="escribir"]').checked = true;
-      syncModo();
-      return;
-    }
-    syncModo();
-
-    var help = $("[data-geo-help]");
-    var ua = navigator.userAgent || "";
-    var device = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? "ios"
-      : /Android/.test(ua) ? "android" : "pc";
-    var STEPS = {
-      android: {
-        name: "celular",
-        steps: [
-          "Toca el ícono que está a la izquierda de la dirección de la página (un candado o una <b>ⓘ</b>).",
-          "Entra en <b>Permisos</b> y luego en <b>Ubicación</b>.",
-          "Elige <b>Permitir</b> o <b>Preguntar</b>. Así te aparecerá la opción <b>Solo esta vez</b>.",
-          "Revisa también que la ubicación del teléfono esté encendida.",
-          "Vuelve aquí y toca <b>Intentar de nuevo</b>."
-        ]
-      },
-      ios: {
-        name: "iPhone",
-        steps: [
-          "Toca <b>aA</b> (o el ícono de ajustes) junto a la dirección de la página.",
-          "Entra en <b>Ajustes del sitio web</b> y en <b>Ubicación</b> elige <b>Preguntar</b>.",
-          "Si no aparece: Ajustes del iPhone, <b>Privacidad y seguridad</b>, <b>Localización</b>, <b>Safari</b> y elige <b>Preguntar la próxima vez</b>.",
-          "Vuelve aquí y toca <b>Intentar de nuevo</b>. Podrás elegir <b>Permitir una vez</b>."
-        ]
-      },
-      pc: {
-        name: "navegador",
-        steps: [
-          "Haz clic en el candado o en el ícono de ajustes que está a la izquierda de la dirección de la página.",
-          "Busca <b>Ubicación</b> y cámbiala a <b>Permitir</b> o <b>Preguntar</b> (o toca <b>Restablecer permisos</b>).",
-          "Vuelve aquí y toca <b>Intentar de nuevo</b>."
-        ]
-      }
-    };
-    $("[data-geo-device]").textContent = STEPS[device].name;
-    $("[data-geo-steps]").innerHTML = STEPS[device].steps.map(function (t) { return "<li>" + t + "</li>"; }).join("");
-
-    function permState(cb) {
-      if (!navigator.permissions || !navigator.permissions.query) return cb("unknown");
-      navigator.permissions.query({ name: "geolocation" }).then(function (st) {
-        if (!st._watched) {
-          st._watched = true;
-          st.onchange = function () { // si el cliente lo activa en los ajustes, seguimos solos
-            if (st.state !== "denied" && !help.hidden) { help.hidden = true; btn.hidden = false; if (st.state === "granted") request(); }
-          };
-        }
-        cb(st.state);
-      }, function () { cb("unknown"); });
-    }
-    function showHelp() {
-      help.hidden = false; btn.hidden = true; showMsg("");
-      label.textContent = "Usar mi ubicación actual";
-    }
-
-    $("[data-geo-retry]").addEventListener("click", function () {
-      permState(function (state) {
-        if (state === "denied") {
-          showMsg("Todavía aparece bloqueada. Revisa los pasos de arriba o recarga la página después de activarla.");
-          help.classList.remove("is-shake"); void help.offsetWidth; help.classList.add("is-shake");
-          return;
-        }
-        help.hidden = true; btn.hidden = false; request();
-      });
-    });
-    $("[data-geo-write]").addEventListener("click", function () {
-      var w = f.querySelector('input[name="modo"][value="escribir"]');
-      w.checked = true; help.hidden = true; btn.hidden = false; syncModo(); showMsg("");
-      f.direccion.focus();
-    });
-
-    btn.addEventListener("click", function () {
-      permState(function (state) {
-        if (state === "denied") return showHelp(); // bloqueada: el navegador no dejará preguntar de nuevo
-        request();
-      });
-    });
-
-    function request() {
-      btn.disabled = true; btn.classList.add("is-busy");
-      label.textContent = "Buscando tu ubicación…";
-      showMsg("");
-      navigator.geolocation.getCurrentPosition(function (pos) {
-        btn.disabled = false; btn.classList.remove("is-busy");
-        label.textContent = "Usar mi ubicación actual";
-        setGeo({
-          lat: pos.coords.latitude.toFixed(6),
-          lng: pos.coords.longitude.toFixed(6),
-          acc: Math.round(pos.coords.accuracy || 0)
-        });
-      }, function (err) {
-        btn.disabled = false; btn.classList.remove("is-busy");
-        label.textContent = "Usar mi ubicación actual";
-        if (err && err.code === 1) {
-          permState(function (state) {
-            if (state === "prompt") {
-              // cerró el aviso sin elegir: el botón lo vuelve a mostrar
-              showMsg("Cerraste el aviso sin elegir. Toca el botón otra vez y elige Permitir o Solo esta vez.");
-            } else {
-              showHelp();
-            }
-          });
-        } else {
-          showMsg("No pudimos obtener tu ubicación. Revisa que el GPS esté encendido e inténtalo de nuevo, o elige \u201CEscribir la dirección\u201D.");
-        }
-      }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 });
-    }
-
-    $("[data-geo-clear]").addEventListener("click", function () {
-      setGeo(null);
-      help.hidden = true;
-      label.textContent = "Usar mi ubicación actual";
-      btn.focus();
-    });
-  }
-
   function checkout() {
     var f = els.form;
     if (!cart.length) return;
     if (!f.nombre.value.trim()) return fail(f.nombre, "Escribe tu nombre para saber a quién entregar el pedido.");
-    if (f.entrega.value === "Delivery" && modo() === "ubicacion" && !geo) {
-      var gb = $("[data-geo-btn]");
-      $("[data-geo-msg]").textContent = "Toca \u201CUsar mi ubicación actual\u201D o elige escribir la dirección.";
-      if (gb) gb.focus();
-      els.error.textContent = "Falta tu ubicación para el delivery.";
-      return;
-    }
-    if (f.entrega.value === "Delivery" && modo() === "escribir" && f.direccion.value.trim().length < 6) {
+    if (f.entrega.value === "Delivery" && f.direccion.value.trim().length < 6) {
       return fail(f.direccion, "Escribe la dirección de entrega con un punto de referencia.");
     }
     var url = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(buildMessage(f));
@@ -704,7 +532,6 @@
     safe(initVideo);
     safe(initCart);
     safe(initSheet);
-    safe(initGeo);
     safe(initFilters);
     safe(initStatus);
     safe(initReveal);

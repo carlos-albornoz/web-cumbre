@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero-poster.webp">
-  <link rel="stylesheet" href="css/styles.css?v=20261016">
+  <link rel="stylesheet" href="css/styles.css?v=20261017">
 </head>
 <body>
   <a class="skip" href="#menu">Saltar al menú</a>
@@ -708,40 +708,10 @@
           </div>
         </fieldset>
 
-        <div class="field" data-address-field>
-          <span>¿Cómo nos dices dónde entregar?</span>
-          <div class="seg seg--modo" role="radiogroup" aria-label="Forma de indicar la dirección" data-modo>
-            <label><input type="radio" name="modo" value="ubicacion" checked><span>📍 Compartir mi ubicación</span></label>
-            <label><input type="radio" name="modo" value="escribir"><span>✍️ Escribir la dirección</span></label>
-          </div>
-          <div class="geo" data-geo>
-            <button class="geo__btn" type="button" data-geo-btn>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7"/></svg>
-              <span data-geo-label>Usar mi ubicación actual</span>
-            </button>
-            <div class="geo__ok" data-geo-ok hidden>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-              <div>
-                <strong>Ubicación lista</strong>
-                <small data-geo-acc></small>
-              </div>
-              <a data-geo-map href="#" target="_blank" rel="noopener">Ver en el mapa</a>
-              <button type="button" class="trash" data-geo-clear aria-label="Quitar la ubicación" title="Quitar la ubicación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button>
-            </div>
-            <div class="geo__help" data-geo-help hidden>
-              <p class="geo__help-title">La ubicación está bloqueada para esta página</p>
-              <p class="geo__help-sub">Tu <span data-geo-device>navegador</span> no deja que la página vuelva a preguntar. Actívala así (toma unos segundos):</p>
-              <ol class="geo__steps" data-geo-steps></ol>
-              <div class="geo__help-actions">
-                <button type="button" class="btn btn--primary geo__retry" data-geo-retry>Ya la activé, intentar de nuevo</button>
-                <button type="button" class="geo__write" data-geo-write>Mejor escribo la dirección</button>
-              </div>
-            </div>
-            <p class="geo__msg" data-geo-msg role="status"></p>
-          </div>
-          <label class="addr-label" for="direccion" data-addr-label>Punto de referencia <em>(opcional)</em></label>
-          <textarea id="direccion" name="direccion" rows="2" autocomplete="street-address" placeholder="Sector, calle, casa o edificio y un punto de referencia" maxlength="240"></textarea>
-        </div>
+        <label class="field" data-address-field>
+          <span>Dirección de entrega</span>
+          <textarea name="direccion" rows="2" autocomplete="street-address" placeholder="Sector, calle, casa o edificio y un punto de referencia" maxlength="240"></textarea>
+        </label>
 
         <label class="field">
           <span>Forma de pago</span>
@@ -777,6 +747,6 @@
     </footer>
   </aside>
 
-  <script defer src="js/main.js?v=20261016"></script>
+  <script defer src="js/main.js?v=20261017"></script>
 </body>
 </html>

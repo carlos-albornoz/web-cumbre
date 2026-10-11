@@ -742,52 +742,7 @@ legend.sheet__label + * { clear: both; }
 /* Con la barra de pedido visible, el pie de página gana espacio para que "desarrollado por KEHO" siempre se vea */
 body.has-order .foot { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
 
-/* =====================================================================
-   UBICACIÓN CON GPS (carrito)
-   ===================================================================== */
-.geo { display: grid; gap: 8px; margin-bottom: 8px; }
-.geo__btn {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%; min-height: 50px; padding: 0 16px;
-  border: 1.5px dashed var(--sun); border-radius: 14px;
-  background: var(--sun-soft); color: var(--sun);
-  font: 800 1.05rem/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase;
-  transition: background-color .2s, color .2s;
-}
-.geo__btn svg { width: 22px; height: 22px; flex: none; }
-.geo__btn:hover { background: var(--sun); color: var(--ink); border-style: solid; }
-.geo__btn.is-busy svg { animation: geoSpin 1.2s linear infinite; }
-.geo__btn[hidden] { display: none; }
-@keyframes geoSpin { to { transform: rotate(360deg); } }
-.geo__ok {
-  display: grid; grid-template-columns: 28px 1fr auto auto; align-items: center; gap: 10px;
-  padding: 12px 14px; border: 1.5px solid var(--sun); border-radius: 14px;
-  background: color-mix(in srgb, var(--sun) 12%, var(--card));
-}
-.geo__ok[hidden] { display: none; }
-.geo__ok svg { width: 26px; height: 26px; color: var(--sun); }
-.geo__ok strong { display: block; font-weight: 700; color: var(--snow); line-height: 1.2; }
-.geo__ok small { color: var(--muted); font-size: .8rem; }
-.geo__ok a { color: var(--sun); font-weight: 700; font-size: .85rem; text-decoration: none; white-space: nowrap; }
-.geo__ok a:hover { text-decoration: underline; }
-.geo__ok button { border: 0; background: none; color: var(--muted); font-size: .85rem; text-decoration: underline; text-underline-offset: 3px; padding: 6px 0; }
-.geo__ok button:hover { color: var(--snow); }
-.geo__msg { margin: 0; color: var(--sun); font-size: .85rem; font-weight: 600; }
-.geo__msg:empty { display: none; }
-@media (max-width: 380px) {
-  .geo__ok { grid-template-columns: 26px 1fr auto; }
-  .geo__ok a { grid-column: 2; }
-  .geo__ok button { grid-column: 3; grid-row: 1; }
-}
-
-/* Elegir: compartir ubicación o escribir la dirección */
-.seg--modo { margin-bottom: 10px; }
-.seg--modo span { font-size: .9rem; padding: 11px 8px; line-height: 1.2; }
-.geo[hidden], .seg--modo[hidden] { display: none; }
-.addr-label { display: block; margin: 4px 0 6px; font-size: .85rem; font-weight: 600; color: var(--muted); }
-.addr-label em { font-style: normal; color: var(--stone); }
-
-/* Papelera (quitar del pedido / quitar ubicación) */
+/* Papelera para quitar productos del pedido */
 .trash {
   width: 38px; height: 38px; display: grid; place-items: center; padding: 0;
   border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--muted);
@@ -795,23 +750,4 @@ body.has-order .foot { padding-bottom: calc(110px + env(safe-area-inset-bottom))
 }
 .trash svg { width: 18px; height: 18px; }
 .trash:hover { color: var(--ink); background: var(--sun); border-color: var(--sun); }
-.geo__ok .trash { width: 36px; height: 36px; padding: 0; border: 1px solid var(--line); background: transparent; color: var(--muted); }
-.geo__ok .trash:hover { color: var(--ink); background: var(--sun); border-color: var(--sun); }
 
-/* Ayuda cuando la ubicación está bloqueada */
-.geo__help {
-  padding: 16px; border: 1.5px solid var(--sun); border-radius: 14px;
-  background: color-mix(in srgb, var(--sun) 9%, var(--card));
-}
-.geo__help[hidden] { display: none; }
-.geo__help-title { margin: 0 0 4px; font: 800 1.1rem/1.15 var(--f-display); letter-spacing: .06em; text-transform: uppercase; color: var(--sun); }
-.geo__help-sub { margin: 0 0 10px; color: var(--muted); font-size: .88rem; }
-.geo__steps { margin: 0 0 14px; padding-left: 20px; display: grid; gap: 6px; font-size: .9rem; line-height: 1.45; }
-.geo__steps li::marker { color: var(--sun); font-weight: 800; }
-.geo__steps b { color: var(--snow); }
-.geo__help-actions { display: grid; gap: 8px; }
-.geo__retry { min-height: 48px; font-size: 1rem; width: 100%; }
-.geo__write { border: 0; background: none; color: var(--muted); font-size: .88rem; text-decoration: underline; text-underline-offset: 3px; padding: 6px; }
-.geo__write:hover { color: var(--snow); }
-.geo__help.is-shake { animation: shake .45s var(--ease); }
-@keyframes shake { 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(3px); } }
